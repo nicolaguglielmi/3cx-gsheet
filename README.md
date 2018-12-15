@@ -7,9 +7,11 @@ This is a workaroud to give users access to the 3cx call log without give high l
 To make it working you need a few steps:
   - Create the access to gsheet through the API
   - Install the dependencies in python3
+  - Configure the script parameters to your needs
   - run it, at your own risk, it's an early write :)
   
 ### Google sheet access
+
 1. Open the Google API Console and create a new project, you can use this shortcut: https://console.cloud.google.com/apis/api/sheets.googleapis.com
 2. Enable the API for that project
 3. Create a credential set, select web server, application data
@@ -20,6 +22,7 @@ To make it working you need a few steps:
 
 
 ### Python libs
+
 The script is for python3, the libs that you need are:
 1. gspread
 2. oauth2client
@@ -28,6 +31,16 @@ Install the required libs with:
 ```
 pip3 install gspread oauth2client
 ```
+
+### Script configuration
+
+The only mandatory mods that you have to do is the name of the google sheet inside the script:
+```python
+#ghoogle sheet name, please type your :)
+gsheetname='Your gsheet name'
+```
+if you need you can change the extensions matching regex to fit your extension setup, 
+the script is ready to use for 3 digits extensions starting with a 2, eg:200, 201 etc...
 
 
 ### Run
