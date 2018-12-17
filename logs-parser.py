@@ -10,7 +10,7 @@ import time
 refresh=10
 #log filename
 logfile='/var/lib/3cxpbx/Instance1/Data/Logs/3CXDialer.log'
-#ghoogle sheet name, please type your :)
+#google sheet name, please type your :)
 gsheetname='Call Logs'
 
 
@@ -18,6 +18,7 @@ gsheetname='Call Logs'
 last_call=0
 
 def sheet_write(values='',update=True):
+
     #call_num,date,time,caller,called
     # use credentials in json to create a client to interact with the Google Sheet
     scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
@@ -29,12 +30,12 @@ def sheet_write(values='',update=True):
     if not update:
         #write to google sheet the new values
         sheet.insert_row(values.split(';'),2)
-        print('Last update:',now_time.strftime("%d/%m/%Y %H:%M:%S"),values.split(';'))
+        print('Last update:',datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S"),values.split(';'))
     
     if update:
        #write just the updated timestamp
-       sheet.update_acell('F1','Last update:'+now_time.strftime("%d/%m/%Y %H:%M:%S"))
-       print('Last update:'+now_time.strftime("%d/%m/%Y %H:%M:%S"))
+       sheet.update_acell('F1','Last update:'+datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
+       print('Last update:'+datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
 
 def match_call(newline):
     global last_call
@@ -63,12 +64,11 @@ logfile_handle.seek(0,2)
 
 while True:
     newline = logfile_handle.readline()
-
     if not newline:
-        now_time=datetime.datetime.now()
         sheet_write()
         time.sleep(refresh)
         continue
-    match_call(newline)
+    else:
+        match_call(newline)
 
 
