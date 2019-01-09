@@ -51,10 +51,11 @@ def match_call(newline):
     Sheet_Buffer=""
     #this matches an extension in the format 2xx, if you have another exensions numbering, please modify
     #the following part of the regex according to your needs: DN=[2][0-9]{2}.+ and put inside the regex below
-    matches=re.findall(r'[1-9]{2}\/[1-9]{2}\/[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.+\[\bDialing\].+DN=[2][0-9]{2}.+',newline)
+    matches=re.findall(r'[0-9]{2}\/[0-9]{2}\/[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.+\[\bDialing\].+DN=[2][0-9]{2}.+',newline)
+
     for line in matches:
         Result_Callnum=re.search(r'Call\(([\d]+)\)',line)
-        Result_Date=re.search(r'[1-9]{2}\/[1-9]{2}\/[0-9]{2}',line)
+        Result_Date=re.search(r'[0-9]{2}\/[0-9]{2}\/[0-9]{2}',line)
         Result_Time=re.search(r'[0-9]{2}:[0-9]{2}:[0-9]{2}',line)
         Result_Caller=re.search(r'DN=([\d]+)',line)
         Result_Called=re.search(r'EP=([\d]+)',line)
